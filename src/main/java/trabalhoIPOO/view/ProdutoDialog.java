@@ -165,6 +165,8 @@ public class ProdutoDialog extends javax.swing.JDialog {
             descField.setText(prod.getDescricao());
             categField.setText(prod.getCategoria());
             precoField.setText(Integer.valueOf(prod.getPreco()).toString());
+        } else {
+            idField.setEnabled(true);
         }
     }
 

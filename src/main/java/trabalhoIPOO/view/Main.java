@@ -7,7 +7,7 @@ import trabalhoIPOO.repository.ProdutoRepositoryArray;
 import javax.swing.*;
 import java.util.Objects;
 
-public class Principal {
+public class Main {
 
     public static final String menu = """
               1 - Inserir Produto\s
@@ -40,9 +40,12 @@ public class Principal {
                     break;
                 case "3":
                     id = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice do produto que sera alterado"));
-                    prod = new Produto();
-                    prod.setId(id);
-                    produtoRepository.exclui(prod);
+                    prod = produtoRepository.pesquisaPorId(id);
+                    if (prod == null) {
+                        JOptionPane.showMessageDialog(null, "ID do produto não encontrado");
+                    } else {
+                        produtoRepository.exclui(prod);
+                    }
                     break;
                 case "4":
                     id = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice do cadastro que sera alterado"));
@@ -52,10 +55,13 @@ public class Principal {
                 case "5":
                     StringBuilder resposta = new StringBuilder();
                     for (Produto produto : produtoRepository.listaTodos()) {
-                        if (produto != null)
-                            resposta.append(produto).append("\n");
+                        resposta.append(produto).append("\n");
                     }
-                    JOptionPane.showMessageDialog(null, resposta.toString());
+                    if (resposta.length() == 0) {
+                        JOptionPane.showMessageDialog(null, "Nenhum produto encontrado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, resposta.toString());
+                    }
                     break;
                 case "6":
                     break;
