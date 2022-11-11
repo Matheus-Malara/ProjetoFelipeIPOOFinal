@@ -5,6 +5,7 @@ import trabalhoIPOO.repository.ProdutoRepository;
 import trabalhoIPOO.repository.ProdutoRepositoryArray;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class Principal {
 
@@ -26,14 +27,16 @@ public class Principal {
             opcao = JOptionPane.showInputDialog(menu);
             switch (opcao) {
                 case "1":
-                    prod = obtemInfoProduto();
-                    produtoRepository.insere(prod);
+                    obtemInfoProduto(null);
                     break;
                 case "2":
                     int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice do produto que sera alterado"));
-                    prod = obtemInfoProduto();
-                    prod.setId(id);
-                    produtoRepository.altera(prod);
+                    prod = produtoRepository.pesquisaPorId(id);
+                    if (prod == null) {
+                        JOptionPane.showMessageDialog(null, "ID do produto não encontrado");
+                    } else {
+                        obtemInfoProduto(prod);
+                    }
                     break;
                 case "3":
                     id = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice do produto que sera alterado"));
@@ -44,7 +47,7 @@ public class Principal {
                 case "4":
                     id = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice do cadastro que sera alterado"));
                     prod = produtoRepository.pesquisaPorId(id);
-                    JOptionPane.showMessageDialog(null, prod);
+                    JOptionPane.showMessageDialog(null, Objects.requireNonNullElse(prod, "ID do produto não encontrado"));
                     break;
                 case "5":
                     StringBuilder resposta = new StringBuilder();
@@ -62,14 +65,11 @@ public class Principal {
         }
     }
 
-    private static Produto obtemInfoProduto() {
-        Produto p = new Produto();
-        p.setId(Integer.parseInt(JOptionPane.showInputDialog("Digite o id")));
-        p.setNome(JOptionPane.showInputDialog("Digite o nome"));
-        p.setDescricao(JOptionPane.showInputDialog("Digite a descricao"));
-        p.setCategoria(JOptionPane.showInputDialog("Digite a categoria"));
-        p.setPreco(Integer.parseInt(JOptionPane.showInputDialog("Digite o preco")));
-        return p;
+    private static void obtemInfoProduto(Produto prod) {
+
+        ProdutoDialog dialog = new ProdutoDialog(null, true, produtoRepository, prod);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
     }
 
     public static ProdutoRepository getProdutoRepository(){
