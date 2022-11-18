@@ -6,12 +6,11 @@ import lombok.ToString;
 @Data
 @ToString
 @NoArgsConstructor
-public class Produto {
+public class Filme {
 
-	private int id;
 	private String nome;
 	private String descricao;
-	private String categoria;
-	private int preco;
+	private String idioma;
+	private int duracao;
 
 }

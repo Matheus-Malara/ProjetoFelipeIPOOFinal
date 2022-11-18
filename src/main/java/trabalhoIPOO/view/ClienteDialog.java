@@ -1,18 +1,18 @@
 package trabalhoIPOO.view;
 
-import trabalhoIPOO.model.Filme;
-import trabalhoIPOO.repository.FilmeRepository;
+import trabalhoIPOO.model.Cliente;
+import trabalhoIPOO.repository.ClienteRepository;
 
 import java.awt.*;
 
-public class ProdutoDialog extends javax.swing.JDialog {
+public class ClienteDialog extends javax.swing.JDialog {
 
-    private final FilmeRepository filmeRepository;
-    private final Filme filme;
-    public ProdutoDialog(Frame parent, boolean modal, FilmeRepository filmeRepository, Filme filme) {
+    private final ClienteRepository clienteRepository;
+    private final Cliente cliente;
+    public ClienteDialog(Frame parent, boolean modal, ClienteRepository clienteRepository, Cliente cliente) {
         super(parent, modal);
-        this.filmeRepository = filmeRepository;
-        this.filme = filme;
+        this.clienteRepository = clienteRepository;
+        this.cliente = cliente;
         initComponents();
     }
 
@@ -32,19 +32,19 @@ public class ProdutoDialog extends javax.swing.JDialog {
         javax.swing.JSeparator jSeparator2 = new javax.swing.JSeparator();
 
         nomeField = new javax.swing.JTextField();
-        descField = new javax.swing.JTextField();
-        idiomaField = new javax.swing.JTextField();
-        duracaoField = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
+        senhaField = new javax.swing.JTextField();
+        codClienteField = new javax.swing.JTextField();
 
         jLabel2.setText("Nome:");
-        jLabel3.setText("Descrição:");
-        jLabel4.setText("Idioma:");
-        jLabel5.setText("Duração:");
+        jLabel3.setText("Email:");
+        jLabel4.setText("Senha:");
+        jLabel5.setText("Cod Cliente:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
-        jLabel6.setText("Filme:");
+        jLabel6.setFont(new Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        jLabel6.setText("Cadastro:");
 
         jButton2.setText("Salvar");
         jButton2.addActionListener(evt -> jButton2ActionPerformed());
@@ -52,10 +52,10 @@ public class ProdutoDialog extends javax.swing.JDialog {
         jButton1.setText("Cancelar");
         jButton1.addActionListener(evt -> jButton1ActionPerformed());
 
-        nomeField.setMinimumSize(new java.awt.Dimension(80, 22));
-        descField.setMinimumSize(new java.awt.Dimension(80, 22));
-        idiomaField.setMinimumSize(new java.awt.Dimension(80, 22));
-        duracaoField.setMinimumSize(new java.awt.Dimension(80, 22));
+        nomeField.setMinimumSize(new Dimension(80, 22));
+        emailField.setMinimumSize(new Dimension(80, 22));
+        senhaField.setMinimumSize(new Dimension(80, 22));
+        codClienteField.setMinimumSize(new Dimension(80, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,7 +86,7 @@ public class ProdutoDialog extends javax.swing.JDialog {
                                                 .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel3)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(descField, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                                        .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                                                 .addGroup(layout.createSequentialGroup()
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                 .addComponent(jLabel2))
@@ -99,8 +99,8 @@ public class ProdutoDialog extends javax.swing.JDialog {
                                                                 .addComponent(jLabel5))
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(idiomaField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(duracaoField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                                .addComponent(senhaField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(codClienteField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                         .addContainerGap(20, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -127,39 +127,41 @@ public class ProdutoDialog extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel3)
-                                                .addComponent(descField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel4)
-                                                .addComponent(idiomaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(senhaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel5)
-                                                .addComponent(duracaoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(codClienteField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addContainerGap(77, Short.MAX_VALUE)))
         );
 
         pack();
-        if (filme != null) {
-            nomeField.setText(filme.getNome());
-            descField.setText(filme.getDescricao());
-            idiomaField.setText(filme.getIdioma());
-            duracaoField.setText(Integer.valueOf(filme.getDuracao()).toString());
+        if (cliente != null) {
+            nomeField.setText(cliente.getNome());
+            emailField.setText(cliente.getEmail());
+            senhaField.setText(cliente.getSenha());
+            codClienteField.setText(cliente.getCodCliente());
+            codClienteField.setVisible(true);
+            codClienteField.setEnabled(false);
+            jLabel5.setVisible(true);
+        } else {
+            codClienteField.setVisible(false);
+            jLabel5.setVisible(false);
         }
     }
 
 
     private void jButton2ActionPerformed() {
-        Filme filmeAdd = new Filme();
-        filmeAdd.setNome(nomeField.getText());
-        filmeAdd.setDescricao(descField.getText());
-        filmeAdd.setIdioma(idiomaField.getText());
-        filmeAdd.setDuracao(Integer.parseInt(duracaoField.getText()));
-        if (filme == null) {
-            filmeRepository.insere(filmeAdd);
-        } else {
-            filmeRepository.altera(filmeAdd, this.filme.getNome());
-        }
+        Cliente clienteAdd = new Cliente();
+        clienteAdd.setNome(nomeField.getText());
+        clienteAdd.setEmail(emailField.getText());
+        clienteAdd.setSenha(senhaField.getText());
+        clienteAdd.setCodCliente(codClienteField.getText());
+            clienteRepository.cadastra(clienteAdd);
         dispose();
     }
 
@@ -168,9 +170,9 @@ public class ProdutoDialog extends javax.swing.JDialog {
     }
 
     private javax.swing.JTextField nomeField;
-    private javax.swing.JTextField descField;
-    private javax.swing.JTextField idiomaField;
-    private javax.swing.JTextField duracaoField;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JTextField senhaField;
+    private javax.swing.JTextField codClienteField;
     // End of variables declaration
 }
 
